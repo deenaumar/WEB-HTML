@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3a7b7415d82646f8acead02c82194bf5" Name="Diagram1" ZoomLevel="113" >
+        <EntityTypeShape EntityType="online_x0020_shopping.User" Width="1.625" PointX="2.125" PointY="0.5" />
+        <EntityTypeShape EntityType="online_x0020_shopping.customer" Width="1.5" PointX="4.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="online_x0020_shopping.Payment" Width="1.625" PointX="7.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="online_x0020_shopping.Account" Width="1.5" PointX="4.5" PointY="3.625" />
+        <EntityTypeShape EntityType="online_x0020_shopping.order" Width="1.5" PointX="7.375" PointY="3" />
+        <EntityTypeShape EntityType="online_x0020_shopping.Userstate" Width="1.5" PointX="1.625" PointY="4.125" />
+        <EntityTypeShape EntityType="online_x0020_shopping.Shoppingcart" Width="1.5" PointX="5.375" PointY="7" />
+        <EntityTypeShape EntityType="online_x0020_shopping.lineitem" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="online_x0020_shopping.Product1" Width="1.5" PointX="2.5" PointY="6.75" />
+        <AssociationConnector Association="online_x0020_shopping.Usercustomer" />
+        <AssociationConnector Association="online_x0020_shopping.customerPayment" />
+        <AssociationConnector Association="online_x0020_shopping.PaymentAccount" />
+        <AssociationConnector Association="online_x0020_shopping.AccountShoppingcart" />
+        <AssociationConnector Association="online_x0020_shopping.Accountorder" />
+        <AssociationConnector Association="online_x0020_shopping.Shoppingcartlineitem" />
+        <AssociationConnector Association="online_x0020_shopping.lineitemProduct1" />
+        <AssociationConnector Association="online_x0020_shopping.UserShoppingcart" />
+        <AssociationConnector Association="online_x0020_shopping.customerAccount" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

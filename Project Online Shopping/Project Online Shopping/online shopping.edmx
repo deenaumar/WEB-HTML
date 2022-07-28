@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="online_x0020_shopping.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="online_x0020_shoppingTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="online_x0020_shopping" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="online_x0020_shoppingContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="online_x0020_shopping.User" />
+          <EntitySet Name="customers" EntityType="online_x0020_shopping.customer" />
+          <EntitySet Name="Payments" EntityType="online_x0020_shopping.Payment" />
+          <EntitySet Name="Accounts" EntityType="online_x0020_shopping.Account" />
+          <EntitySet Name="orders" EntityType="online_x0020_shopping.order" />
+          <EntitySet Name="Userstates" EntityType="online_x0020_shopping.Userstate" />
+          <EntitySet Name="Shoppingcarts" EntityType="online_x0020_shopping.Shoppingcart" />
+          <EntitySet Name="lineitems" EntityType="online_x0020_shopping.lineitem" />
+          <EntitySet Name="Product1" EntityType="online_x0020_shopping.Product1" />
+          <AssociationSet Name="Usercustomer" Association="online_x0020_shopping.Usercustomer">
+            <End Role="User" EntitySet="Users" />
+            <End Role="customer" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="customerPayment" Association="online_x0020_shopping.customerPayment">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="PaymentAccount" Association="online_x0020_shopping.PaymentAccount">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="AccountShoppingcart" Association="online_x0020_shopping.AccountShoppingcart">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Shoppingcart" EntitySet="Shoppingcarts" />
+          </AssociationSet>
+          <AssociationSet Name="Accountorder" Association="online_x0020_shopping.Accountorder">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="Shoppingcartlineitem" Association="online_x0020_shopping.Shoppingcartlineitem">
+            <End Role="Shoppingcart" EntitySet="Shoppingcarts" />
+            <End Role="lineitem" EntitySet="lineitems" />
+          </AssociationSet>
+          <AssociationSet Name="lineitemProduct1" Association="online_x0020_shopping.lineitemProduct1">
+            <End Role="lineitem" EntitySet="lineitems" />
+            <End Role="Product1" EntitySet="Product1" />
+          </AssociationSet>
+          <AssociationSet Name="UserShoppingcart" Association="online_x0020_shopping.UserShoppingcart">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Shoppingcart" EntitySet="Shoppingcarts" />
+          </AssociationSet>
+          <AssociationSet Name="customerAccount" Association="online_x0020_shopping.customerAccount">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="passward" Type="String" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" />
+          <NavigationProperty Name="customers" Relationship="online_x0020_shopping.Usercustomer" FromRole="User" ToRole="customer" />
+          <NavigationProperty Name="Shoppingcarts" Relationship="online_x0020_shopping.UserShoppingcart" FromRole="User" ToRole="Shoppingcart" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="online_x0020_shopping.Usercustomer" FromRole="customer" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Payments" Relationship="online_x0020_shopping.customerPayment" FromRole="customer" ToRole="Payment" />
+          <NavigationProperty Name="Accounts" Relationship="online_x0020_shopping.customerAccount" FromRole="customer" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paid" Type="String" Nullable="false" />
+          <Property Name="total" Type="String" Nullable="false" />
+          <Property Name="details" Type="String" Nullable="false" />
+          <NavigationProperty Name="customer" Relationship="online_x0020_shopping.customerPayment" FromRole="Payment" ToRole="customer" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="online_x0020_shopping.PaymentAccount" FromRole="Payment" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="billing" Type="String" Nullable="false" />
+          <Property Name="open" Type="String" Nullable="false" />
+          <Property Name="close" Type="String" Nullable="false" />
+          <NavigationProperty Name="Payment" Relationship="online_x0020_shopping.PaymentAccount" FromRole="Account" ToRole="Payment" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shoppingcarts" Relationship="online_x0020_shopping.AccountShoppingcart" FromRole="Account" ToRole="Shoppingcart" />
+          <NavigationProperty Name="orders" Relationship="online_x0020_shopping.Accountorder" FromRole="Account" ToRole="order" />
+          <NavigationProperty Name="customer" Relationship="online_x0020_shopping.customerAccount" FromRole="Account" ToRole="customer" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="String" Nullable="false" />
+          <Property Name="ordered" Type="String" Nullable="false" />
+          <Property Name="shipping" Type="String" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" />
+          <Property Name="total" Type="String" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="online_x0020_shopping.Accountorder" FromRole="order" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Userstate">
+          <Key>
+            <PropertyRef Name="new" />
+          </Key>
+          <Property Name="new" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Blocked" Type="String" Nullable="false" />
+          <Property Name="Active" Type="String" Nullable="false" />
+          <Property Name="Banned" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shoppingcart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="created" Type="String" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="online_x0020_shopping.AccountShoppingcart" FromRole="Shoppingcart" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="lineitems" Relationship="online_x0020_shopping.Shoppingcartlineitem" FromRole="Shoppingcart" ToRole="lineitem" />
+          <NavigationProperty Name="User" Relationship="online_x0020_shopping.UserShoppingcart" FromRole="Shoppingcart" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lineitem">
+          <Key>
+            <PropertyRef Name="quantity" />
+          </Key>
+          <Property Name="quantity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="price" Type="String" Nullable="false" />
+          <NavigationProperty Name="Shoppingcart" Relationship="online_x0020_shopping.Shoppingcartlineitem" FromRole="lineitem" ToRole="Shoppingcart" />
+          <Property Name="ShoppingcartId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product1" Relationship="online_x0020_shopping.lineitemProduct1" FromRole="lineitem" ToRole="Product1" />
+        </EntityType>
+        <EntityType Name="Product1">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Id" Type="String" Nullable="false" />
+          <Property Name="supplier" Type="String" Nullable="false" />
+          <NavigationProperty Name="lineitem" Relationship="online_x0020_shopping.lineitemProduct1" FromRole="Product1" ToRole="lineitem" />
+          <Property Name="lineitem_quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="Usercustomer">
+          <End Type="online_x0020_shopping.User" Role="User" Multiplicity="1" />
+          <End Type="online_x0020_shopping.customer" Role="customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customerPayment">
+          <End Type="online_x0020_shopping.customer" Role="customer" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PaymentAccount">
+          <End Type="online_x0020_shopping.Payment" Role="Payment" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountShoppingcart">
+          <End Type="online_x0020_shopping.Account" Role="Account" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Shoppingcart" Role="Shoppingcart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shoppingcart">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Accountorder">
+          <End Type="online_x0020_shopping.Account" Role="Account" Multiplicity="1" />
+          <End Type="online_x0020_shopping.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Shoppingcartlineitem">
+          <End Type="online_x0020_shopping.Shoppingcart" Role="Shoppingcart" Multiplicity="1" />
+          <End Type="online_x0020_shopping.lineitem" Role="lineitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoppingcart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="lineitem">
+              <PropertyRef Name="ShoppingcartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lineitemProduct1">
+          <End Type="online_x0020_shopping.lineitem" Role="lineitem" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Product1" Role="Product1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lineitem">
+              <PropertyRef Name="quantity" />
+            </Principal>
+            <Dependent Role="Product1">
+              <PropertyRef Name="lineitem_quantity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserShoppingcart">
+          <End Type="online_x0020_shopping.User" Role="User" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Shoppingcart" Role="Shoppingcart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shoppingcart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="customerAccount">
+          <End Type="online_x0020_shopping.customer" Role="customer" Multiplicity="1" />
+          <End Type="online_x0020_shopping.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="online_x0020_shopping" />
+        <Alias Key="Target" Value="online_x0020_shopping.Store" />
+        <EntityContainerMapping CdmEntityContainer="online_x0020_shoppingContainer" StorageEntityContainer="online_x0020_shoppingTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
